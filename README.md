@@ -8,12 +8,12 @@ All the necessary Pokémon data is available on http://pokeapi.co/ .
 
 ### Features
 The application user should be able to:
-● See the Pokémon list
-● See each Pokémon's details: abilities, moves etc.
-● Add Pokémon to the “My Pokémon” list
-● Remove Pokémon from the “My Pokémon” list
-● See the “My Pokémon” list
-● See Pokémon’s details from the “My Pokémon” list
+    ● See the Pokémon list
+    ● See each Pokémon's details: abilities, moves etc.
+    ● Add Pokémon to the “My Pokémon” list
+    ● Remove Pokémon from the “My Pokémon” list
+    ● See the “My Pokémon” list
+    ● See Pokémon’s details from the “My Pokémon” list
 
 The application should be responsive.
 It is ok if the application has additional features, but the minimum list from above should be
