@@ -89,12 +89,12 @@ $(function () {
 	function addOwnedPokemon(id){
 		// Update MyPokemon
 		var pokemonCardOwn = $(".myPokemon").find(".pokemonCard[data-id=" + id + "]");
-		pokemonCardOwn.find(".ownIcon").attr("src", "img/heart-fill.svg");
+		pokemonCardOwn.find(".ownIcon").addClass("pokemonSelected").attr("src", "img/heart-fill.svg");
 		pokemonCardOwn.removeClass("notOwned").addClass("owned");
 		pokemonCardOwn.show();	
 		// Update Overview
 		var pokemonCardOverview = $(".pokemonOverview").find(".pokemonCard[data-id=" + id + "]");
-		pokemonCardOverview.find(".ownIcon").attr("src", "img/heart-fill.svg");
+		pokemonCardOverview.find(".ownIcon").addClass("pokemonSelected").attr("src", "img/heart-fill.svg");
 		pokemonCardOverview.removeClass("notOwned").addClass("owned");
 
 		// Cookie aktualisieren
@@ -105,12 +105,12 @@ $(function () {
 	function removeOwnedPokemon(id){
 		// Update MyPokemon
 		var pokemonCardOwn = $(".myPokemon").find(".pokemonCard[data-id=" + id + "]");
-		pokemonCardOwn.find(".ownIcon").attr("src", "img/heart.svg");
+		pokemonCardOwn.find(".ownIcon").removeClass("pokemonSelected").attr("src", "img/heart.svg");
 		pokemonCardOwn.removeClass("owned").addClass("notOwned");
 		pokemonCardOwn.hide();	
 		// Update Overview
 		var pokemonCardOverview = $(".pokemonOverview").find(".pokemonCard[data-id=" + id + "]");
-		pokemonCardOverview.find(".ownIcon").attr("src", "img/heart.svg");
+		pokemonCardOverview.find(".ownIcon").removeClass("pokemonSelected").attr("src", "img/heart.svg");
 		pokemonCardOverview.removeClass("owned").addClass("notOwned");
 
 		// Cookie aktualisieren
