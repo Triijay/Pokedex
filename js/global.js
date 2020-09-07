@@ -1,4 +1,7 @@
 var overviewHtmlCode = "";
+var pokeHtmlDict = new Object();
+pokeHtmlDict["count"] = 0;
+pokeHtmlDict["pokemon"] = [];
 
 $(function () {
 
@@ -92,18 +95,18 @@ $(function () {
 	function getSyncPokemonList(){		
 		return $.ajax({
 			url:"https://pokeapi.co/api/v2/pokemon?limit=151",
-			success: function(result){
-				console.log(result);	
+			success: function(result){	
 				
 				var promises = [];
 				for(var i=0; i<result.results.length; i++){		
 					var request = getSyncPokemonDetails(i);
-					console.log(i);
 					promises.push(request);	
 				}
 
 				$.when.apply(null, promises).done(function(){
-					console.log(overviewHtmlCode);
+					for(var j=0; j<pokeHtmlDict["count"]; j++){
+						overviewHtmlCode += pokeHtmlDict["pokemon"][j];
+					}
 					$(".pokemonOverview").html(overviewHtmlCode);
 					$(".myPokemon").html(overviewHtmlCode);
 					$(".myPokemon .pokemonCard.notOwned").hide();
@@ -138,7 +141,8 @@ $(function () {
   </div>\
 </div>'; 
 
-					overviewHtmlCode += html;
+					pokeHtmlDict["pokemon"][pokemon.id-1] = html;				
+					pokeHtmlDict["count"] = pokeHtmlDict["count"] + 1;	
 				}
 			}
 		});
