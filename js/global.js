@@ -1,3 +1,5 @@
+var overviewHtmlCode = "";
+
 $(function () {
 
 	console.log("DOM-ready");
@@ -14,48 +16,7 @@ $(function () {
 
 	// Get the Pokémon list of the 151 original pokémon and add them to cards
 	// Store the own pokemon additionally in the second html part
-	$.ajax({url:"https://pokeapi.co/api/v2/pokemon?limit=151", success: function(result){
-		var overviewHtmlCode = "";
-		var classOwned = "";
-		var icon = "";
-		var promises = [];
-		for(var i=0; i<result.results.length; i++){		
-			var request = $.ajax({url:"https://pokeapi.co/api/v2/pokemon/" + (i+1), success: function(pokemon){
-				if(pokemon != undefined){
-
-					if($.inArray(pokemon.id, myPokemon) != -1){
-						icon = '<img class="ownIcon pokemonSelected" src="img/heart-fill.svg">';
-						classOwned = "owned";
-					} else {
-						icon = '<img class="ownIcon" src="img/heart.svg">';
-						classOwned = "notOwned";
-					}
-
-					var html = '\
-<div class="card pokemonCard '+ classOwned + ' mb-2 mx-1" data-id="'+ pokemon.id +'">'
-	+ icon +'\
-	<img class="card-img-top" src="'+ pokemon.sprites.front_default +'" alt="Card image cap">\
-  	<div class="card-body">\
-    <h5 class="card-title"><strong>'+ pokemon.id + '. </strong>'+ pokemon.name +'</h5>\
-  </div>\
-</div>'; 
-
-				overviewHtmlCode += html;
-
-			}}});	
-
-			promises.push(request);	
-		}
-
-		$.when.apply(null, promises).done(function(){
-			$(".pokemonOverview").html(overviewHtmlCode);
-			$(".myPokemon").html(overviewHtmlCode);
-			$(".myPokemon .pokemonCard.notOwned").hide();
-		})
-		
-	}});
-
-
+	getSyncPokemonList();
 
 
 	// Button Click on Switch (All / Own)
@@ -125,6 +86,62 @@ $(function () {
 			ownedString += $(this).attr("data-id") + " ";
 		});
 		document.cookie=ownedString;
+	}
+
+
+	function getSyncPokemonList(){		
+		return $.ajax({
+			url:"https://pokeapi.co/api/v2/pokemon?limit=151",
+			success: function(result){
+				console.log(result);	
+				
+				var promises = [];
+				for(var i=0; i<result.results.length; i++){		
+					var request = getSyncPokemonDetails(i);
+					console.log(i);
+					promises.push(request);	
+				}
+
+				$.when.apply(null, promises).done(function(){
+					console.log(overviewHtmlCode);
+					$(".pokemonOverview").html(overviewHtmlCode);
+					$(".myPokemon").html(overviewHtmlCode);
+					$(".myPokemon .pokemonCard.notOwned").hide();
+				})
+			}
+		});
+	}
+
+
+	function getSyncPokemonDetails(i){
+		var classOwned = "";
+		var icon = "";
+
+		return $.ajax({
+			url:"https://pokeapi.co/api/v2/pokemon/" + (i+1),
+			success: function(pokemon){				
+				if(pokemon != undefined){
+					if($.inArray(pokemon.id, myPokemon) != -1){
+						icon = '<img class="ownIcon pokemonSelected" src="img/heart-fill.svg">';
+						classOwned = "owned";
+					} else {
+						icon = '<img class="ownIcon" src="img/heart.svg">';
+						classOwned = "notOwned";
+					}
+
+					var html = '\
+<div class="card pokemonCard '+ classOwned + ' mb-2 mx-1" data-id="'+ pokemon.id +'">'
+	+ icon +'\
+	<img class="card-img-top" src="'+ pokemon.sprites.front_default +'" alt="Card image cap">\
+  	<div class="card-body">\
+    <h5 class="card-title"><strong>'+ pokemon.id + '. </strong>'+ pokemon.name +'</h5>\
+  </div>\
+</div>'; 
+
+					overviewHtmlCode += html;
+				}
+			}
+		});
 	}
 
 
