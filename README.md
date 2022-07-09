@@ -1,5 +1,7 @@
  ## ------ Pokédex ------ ##
  
+ View project on: https://triijay.github.io/Pokedex/
+ 
 ### Assignment 
 The goal is to create a client side JavaScript application: “Pokémon Encyclopedia” - Pokédex
 ( http://pokemon.wikia.com/wiki/Pok%C3%A9dex ).
