@@ -1,4 +1,4 @@
- ## ------ Pokédex ------ ##
+ ## ------ Pokedéx ------ ##
  
  View project on: https://triijay.github.io/Pokedex/
  
