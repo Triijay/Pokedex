@@ -5,7 +5,7 @@
 ### Assignment 
 The goal is to create a client side JavaScript application: “Pokémon Encyclopedia” - Pokédex
 ( http://pokemon.wikia.com/wiki/Pok%C3%A9dex ).
-All the necessary Pokémon data is available on http://pokeapi.co/ .
+All the necessary Pokémon data are available on http://pokeapi.co/ .
 
 
 ### Features
